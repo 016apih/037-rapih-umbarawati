@@ -18,30 +18,26 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="./assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-        <link href="./assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="{{ asset('./assets/homepage/lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('./assets/homepage/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('./assets/homepage/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="./assets/css/style.css" rel="stylesheet">
+        <link href="{{ asset('./assets/homepage/css/style.css') }}" rel="stylesheet">
     </head>
 
     <body>
 
-        <!-- Spinner Start -->
-        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-            <div class="spinner-grow text-primary" role="status"></div>
-        </div>
-        <!-- Spinner End -->
+        <x-spinner />
 
 
-        @include('layouts.header')
+        @include('layouts.homepage.header')
 
 
-        @include('layouts.modal-search')
+        @include('layouts.homepage.modal-search')
 
 
         <main>
@@ -50,7 +46,7 @@
         
 
         <!-- Copyright Start -->
-        <div class="container-fluid copyright bg-dark py-4">
+        <div class="container-fluid copyright bg-dark py-4 bottom-0">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-center mb-3 mb-md-0">
@@ -72,13 +68,13 @@
         <!-- JavaScript Libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="./assets/lib/easing/easing.min.js"></script>
-        <script src="./assets/lib/waypoints/waypoints.min.js"></script>
-        <script src="./assets/lib/lightbox/js/lightbox.min.js"></script>
-        <script src="./assets/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="{{ asset('./assets/homepage/lib/easing/easing.min.js') }}"></script>
+        <script src="{{ asset('./assets/homepage/lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ asset('./assets/homepage/lib/lightbox/js/lightbox.min.js') }}"></script>
+        <script src="{{ asset('./assets/homepage/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
         <!-- Template Javascript -->
-        <script src="./assets/js/main.js"></script>
+        <script src="{{ asset('./assets/homepage/js/main.js') }}"></script>
     </body>
 
 </html>

@@ -1,5 +1,5 @@
- <!-- Our Books Start-->
- <div class="container-fluid fruite py-5">
+<!-- Our Books Start-->
+<div class="container-fluid fruite py-5">
     <div class="container py-5">
         <div class="tab-class text-center">
             <div class="row g-4">
@@ -14,12 +14,13 @@
                             </a>
                         </li>
                         @foreach ($categories as $index => $product)
-                            <li class="nav-item">
-                                <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-{{ $index + 2 }}">
-                                    <span class="text-dark" style="width: 130px;">{{ $product['name'] }}</span>
-                                </a>
-                            </li>
+                            <x-book.category-item :name="$product['name']" href="#tab-{{ $index + 2 }}" />
                         @endforeach
+                        <li class="nav-item">
+                            <a href="{{ route('homepage.more') }}" class="d-flex py-2 m-2 bg-light rounded-pill">
+                                <span class="text-dark" style="width: 130px;">View More</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -43,7 +44,6 @@
                                 <div class="row g-4">
                                     @foreach ($books as $book)
                                         @if ($book['category_name'] == $category['name'])
-                                        {{ $book['category_name'] }}
                                             <x-book.card :book="$book" />
                                         @endif
                                     @endforeach

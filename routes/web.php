@@ -1,139 +1,41 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\AdminController;
 
-Route::get('/', function () {
-    $roles = [
-        [
-            'id' => 1,
-            'name' => 'admin',
-            'created_at' => '15/05/2024',
-        ],[
-            'id' => 2,
-            'name' => 'member',
-            'created_at' => '15/05/2024',
-        ],
-    ];
+// halaman Guest
+Route::controller(HomepageController::class)->group(function(){
+    Route::get("/", "index")->name('homepage');
 
-    $categories = [
-        [
-            'id' => 1,
-            'name' => 'Self Dev',
-            'created_at' =>  '15/05/2024',
-        ], [
-            'id' => 2,
-            'name' => 'Agama',
-            'created_at' =>  '15/05/2024',
-        ], [
-            'id' => 3,
-            'name' => 'Novel',
-            'created_at' =>  '15/05/2024',
-        ]
-    ] ;
+    Route::get("/login", "login")->name('login');
+    Route::post("/login", "show")->name('show');
 
-    $users = [
-        [
-            'id' => 1,
-            'role_id' => 1,
-            'username' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => 'password',
-            'address' => "alamat",
-            'no_hp' => '08963456789',
-            'created_at' => '15/05/2024',
-        ],[
-            'id' => 2,
-            'role_id' => 2,
-            'username' => 'member',
-            'email' => 'member@gmail.com',
-            'password' => 'password',
-            'address' => "alamat",
-            'no_hp' => '08963456789',
-            'created_at' => '15/05/2024',
-        ]
-    ];
+    Route::get("/register", "register")->name('register');
+    Route::post("/register", "store")->name('store');
 
-    $books = [
-        [
-            'id' => 1,
-            'user_id' => 1,
-            'category_id' => 1,
-            'category_name' => 'Self Dev',
-            'title' => 'I Have A Dream',
-            'author' => 'Arif Rahman Lubis',
-            'publisher' => 'Qultum Media',
-            'publication_year' => '2017',
-            'stock' => 1,
-            'status' => 'availabe',
-            'img' => 'book-item-4',
-            'created_at' => '15/05/2024',
-        ], [
-            'id' => 2,
-            'user_id' => 1,
-            'category_id' => 2,
-            'category_name' => 'Agama',
-            'title' => 'Tadabbur Bacaan Shalat',
-            'author' => 'Ibnu Abdil Bari',
-            'publisher' => 'Zaduna',
-            'publication_year' => '2022',
-            'stock' => 1,
-            'status' => 'availabe',
-            'img' => 'book-item-5',
-            'created_at' => '15/05/2024',
-        ], [
-            'id' => 3,
-            'user_id' => 1,
-            'category_id' => 2,
-            'category_name' => 'Agama',
-            'title' => 'Sifat Shalat Nabi SAW',
-            'author' => 'Syaikh Muhammad Nashiruddin al-Abani',
-            'publisher' => 'Darul Haq',
-            'publication_year' => '2016',
-            'stock' => 1,
-            'status' => 'availabe',
-            'img' => 'book-item-3',
-            'created_at' => '15/05/2024',
-        ], [
-            'id' => 4,
-            'user_id' => 1,
-            'category_id' => 2,
-            'category_name' => 'Agama',
-            'title' => 'Seni Merayu Tuhan',
-            'author' => "Husein Ja far Al - Hadar",
-            'publisher' => 'Mizan',
-            'publication_year' => '2022',
-            'stock' => 1,
-            'status' => 'availabe',
-            'img' => 'book-item-1',
-            'created_at' => '15/05/2024',
-        ], [
-            'id' => 5,
-            'user_id' => 1,
-            'category_id' => 2,
-            'category_name' => 'Agama',
-            'title' => 'Tuhan Ada Di Hatimu',
-            'author' => "Husein Ja far Al - Hadar",
-            'publisher' => 'Noura Books',
-            'publication_year' => '2022',
-            'stock' => 1,
-            'status' => 'availabe',
-            'img' => 'book-item-2',
-            'created_at' => '15/05/2024',
-        ]
-    ];
+    Route::get("/view-more", "more")->name('homepage.more');
 
-    $loans = [
-        [
-            'id' => 1,
-            'book_id' => 1,
-            'user_id' => 2,
-            'loan_date' => "15/05/2024",
-            'status' => "active",
-            'return_date' => "20/05/2024",
-            'loan_time' => '5',
-            'created_at' => "15/05/2024"
-        ]
-    ];
+    Route::get("/detail/{id}", "detail")->name('homepage.detail');
+});
 
-    return view('homepage', compact('books', 'categories', ));
+// Rute untuk halaman admin
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/roles', [AdminController::class, 'roles'])->name('roles');
+    Route::post('/roles/create', [AdminController::class, 'storeRole'])->name('roles.store');
+    Route::get('/roles/{mode}/{id?}', [AdminController::class, 'showRole'])->name('roles.action');
+
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users/create', [AdminController::class, 'storeUser'])->name('users.store');
+    Route::get('/users/{mode}/{id?}', [AdminController::class, 'showUser'])->name('users.action');
+
+    Route::get('/books', [AdminController::class, 'books'])->name('books');
+    Route::post('/books/create', [AdminController::class, 'storeBook'])->name('books.store');
+    Route::get('/books/{mode}/{id?}', [AdminController::class, 'showBook'])->name('books.action');
+
+    Route::get('/loans', [AdminController::class, 'roles'])->name('loans');
+
+    Route::post('/manage-user/{userId}', [AdminController::class, 'manageUser'])->name('manageUser');
 });

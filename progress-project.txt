@@ -1,0 +1,39 @@
+===== Tugas Project - Progres 1 =====
+
+Nama          : Rapih Umbarawati
+
+Nomor Urut    : 037
+
+Judul Project : PemulaBooks
+
+Deskripsi     : Website untuk mengelola koleksi buku pribadi, mencari, meminjamkan, dan mengelola koleksi buku secara efisien
+
+Fitur :
+   HomePage (50%)
+   Authentication (50%)
+   AdminPage (45%)
+   MemberPage (10%)
+
+Rata-Rata Progress : 38%
+
+// catatan Detail
+1. homepage                   UI    Integrasi Data   Progress
+   [ ] /homepage/             [v]        [ ]            50%
+   [ ] /homepage/more         [v]        [ ]            50%
+   [ ] /homepage/detail/id    [v]        [ ]            50%
+2, Authentication
+   [ ] /register              [v]        [ ]            50%
+   [ ] /login                 [v]        [ ]            50%
+3. Admin
+   [ ] /admin [dashboard]     [v]        [ ]            35%
+   [ ] /admin/users           [v]        [ ]            50%
+   [ ] /admin/books           [v]        [ ]            50%
+   [ ] /admin/loans           [ ]        [ ]            0%
+   [ ] /admin/roles           [v]        [ ]            50%
+3. Member
+   [ ] /member [dashboard]    [v]        [ ]            35%
+   [ ] /member/profile        [ ]        [ ]            0%
+   [ ] /member/activity       [ ]        [ ]            0%
+   [ ] /member/form-loan      [ ]        [ ]            0%
+
+
