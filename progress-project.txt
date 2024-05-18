@@ -16,6 +16,8 @@ Fitur :
 
 Rata-Rata Progress : 38%
 
+last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/a8ce5273d2210a85a900f4716bd9d21246674392
+
 // catatan Detail
 1. homepage                   UI    Integrasi Data   Progress
    [ ] /homepage/             [v]        [ ]            50%
