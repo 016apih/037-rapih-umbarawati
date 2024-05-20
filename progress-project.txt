@@ -12,9 +12,9 @@ Fitur :
    HomePage (50%)
    Authentication (50%)
    AdminPage (48%)
-   MemberPage (31%)
+   MemberPage (30%)
 
-Rata-Rata Progress : 44.7%
+Rata-Rata Progress : 44.5%
 
 last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/cdb42908686939ff6970522c1c6530284c0c61cb
 
@@ -33,7 +33,6 @@ last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/cdb429086869
    [ ] /admin/loans           [v]        [ ]            45%
    [ ] /admin/roles           [v]        [ ]            50%
 3. Member
-   [ ] /member [dashboard]    [v]        [ ]            35%
    [ ] /member/profile        [v]        [ ]            30%
    [ ] /member/activity       [v]        [ ]            30%
    [ ] /member/form-loan      [v]        [ ]            30%
