@@ -80,8 +80,6 @@ class LoanController extends Controller
                 $result = $loan;
             }
         }
-
-        dd($result);
         return $result;
     }
 

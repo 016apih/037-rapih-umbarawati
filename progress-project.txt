@@ -1,4 +1,4 @@
-===== Tugas Project - Progres 1 =====
+===== Tugas Project - Progres 2 =====
 
 Nama          : Rapih Umbarawati
 
@@ -11,10 +11,10 @@ Deskripsi     : Website untuk mengelola koleksi buku pribadi, mencari, meminjamk
 Fitur :
    HomePage (50%)
    Authentication (50%)
-   AdminPage (45%)
-   MemberPage (10%)
+   AdminPage (48%)
+   MemberPage (31%)
 
-Rata-Rata Progress : 38%
+Rata-Rata Progress : 44.7%
 
 last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/a8ce5273d2210a85a900f4716bd9d21246674392
 
@@ -27,15 +27,13 @@ last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/a8ce5273d221
    [ ] /register              [v]        [ ]            50%
    [ ] /login                 [v]        [ ]            50%
 3. Admin
-   [ ] /admin [dashboard]     [v]        [ ]            35%
+   [ ] /admin [dashboard]     [v]        [ ]            45%
    [ ] /admin/users           [v]        [ ]            50%
    [ ] /admin/books           [v]        [ ]            50%
-   [ ] /admin/loans           [ ]        [ ]            0%
+   [ ] /admin/loans           [v]        [ ]            45%
    [ ] /admin/roles           [v]        [ ]            50%
 3. Member
    [ ] /member [dashboard]    [v]        [ ]            35%
-   [ ] /member/profile        [ ]        [ ]            0%
-   [ ] /member/activity       [ ]        [ ]            0%
-   [ ] /member/form-loan      [ ]        [ ]            0%
-
-
+   [ ] /member/profile        [v]        [ ]            30%
+   [ ] /member/activity       [v]        [ ]            30%
+   [ ] /member/form-loan      [v]        [ ]            30%

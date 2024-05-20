@@ -18,17 +18,18 @@
             </div>
          </div>
          <div class="navbar-nav w-100">
-            <x-item-sidebar :item='["admin.dashboard", "fa fa-tachometer-alt", "Dashboard"]' />
-            
             @if ($auth['role_id'] == 1)
+               <x-item-sidebar :item='["admin.dashboard", "fa fa-tachometer-alt", "Dashboard"]' />
                <x-item-sidebar :item='["admin.roles", "fas fa-user-cog", "Roles"]' />
                <x-item-sidebar :item='["admin.users", "fas fa-users", "Users"]' />
                <x-item-sidebar :item='["admin.books", "fas fa-book", "Books"]' />
                <x-item-sidebar :item='["admin.loans", "fas fa-exchange-alt", "Loans"]' />
 
                @else
-                  <x-item-sidebar :item='["admin.loans", "fas fa-clipboard-list", "Activity"]' />
-                  <x-item-sidebar :item='["admin.loans", "fas fa-users", "Loan History"]' />
+               <i class=""></i>
+                  <x-item-sidebar :item='["member.profile", "fas fa-user-cog", "My Profile"]' />
+                  <x-item-sidebar :item='["member.activity", "fas fa-clipboard-list", "Loan Activity"]' />
+                  <x-item-sidebar :item='["member.loans", "fas fa-users", "Form Loan"]' />
             @endif
       
          </div>

@@ -149,17 +149,22 @@ class AdminController extends Controller
         ]);
     }
     public function showLoan(LoanController $loanController, string $mode, int $id=null){
-        $loan = null;
-
-        if($mode != "create"){
+        
+        if($mode == "create"){
+            return view('pages.admin.loans.create', [
+                'auth' => $this->auth,
+                'mode' => $mode
+            ]);
+        } else {
+            $loan = null;
             $loan = $loanController->show($id);
+            return view('pages.admin.loans.form', [
+                'auth' => $this->auth,
+                'loan' => $loan,
+                'mode' => $mode
+            ]);
         }
         
-        return view('pages.admin.loans.form', [
-            'auth' => $this->auth,
-            'loan' => $loan,
-            'mode' => $mode
-        ]);
     }
     public function storeLoan(LoanController $loanController, Request $request){
         $payload = $request->all();

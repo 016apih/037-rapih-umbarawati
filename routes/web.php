@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MemberController;
 
 // halaman Guest
 Route::controller(HomepageController::class)->group(function(){
@@ -38,4 +39,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/loans', [AdminController::class, 'loans'])->name('loans');
     Route::post('/loans/create', [AdminController::class, 'storeLoan'])->name('loans.store');
     Route::get('/loans/{mode}/{id?}', [AdminController::class, 'showLoan'])->name('loans.action');
+});
+
+// Rute untuk halaman member
+Route::prefix('member')->name('member.')->group(function () {
+    Route::get('/profile', [MemberController::class, 'profile'])->name('profile');
+    Route::get('/activity', [MemberController::class, 'activity'])->name('activity');
+    Route::get('/loans', [MemberController::class, 'formLoan'])->name('loans');
 });

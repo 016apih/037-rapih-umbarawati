@@ -18,20 +18,7 @@
                 <form action="{{ route('admin.loans.store') }}" method="POST">
                     @csrf
                     
-                    {{-- <div class="row mb-3">
-                        <label for="name" class="col-sm-2 col-form-label">Loan</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" id="name"
-                                @if($mode !== "create") value="{{ $loan['name'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                        </div>
-                    </div> --}}
-
-                    <x-form-input :itemValue="$loan['book']['title']" :item="['name' => 'book', 'label' => 'Book', 'mode' => $mode ]" />
-                    {{-- <x-form-input :item="['name' => 'book', 'label' => 'Book', 'mode' => $mode ]" /> --}}
-
-
+                    <x-form-input :item="['name' => 'title', 'label' => 'title', 'mode' => $mode ]" />
 
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">
