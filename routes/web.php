@@ -35,7 +35,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/books/create', [AdminController::class, 'storeBook'])->name('books.store');
     Route::get('/books/{mode}/{id?}', [AdminController::class, 'showBook'])->name('books.action');
 
-    Route::get('/loans', [AdminController::class, 'roles'])->name('loans');
-
-    Route::post('/manage-user/{userId}', [AdminController::class, 'manageUser'])->name('manageUser');
+    Route::get('/loans', [AdminController::class, 'loans'])->name('loans');
+    Route::post('/loans/create', [AdminController::class, 'storeLoan'])->name('loans.store');
+    Route::get('/loans/{mode}/{id?}', [AdminController::class, 'showLoan'])->name('loans.action');
 });

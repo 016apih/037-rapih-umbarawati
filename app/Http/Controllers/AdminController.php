@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\LoanController;
 
 class AdminController extends Controller
 {
@@ -140,10 +141,37 @@ class AdminController extends Controller
         ]);
     }
 
-    public function manageUser($userId)
-    {
-        $this->adminService->manageUser($userId);
-        return redirect()->back()->with('status', 'User managed successfully');
+    public function loans(LoanController $loanController){
+        return view('pages.admin.loans.index',[
+            'auth' => $this->auth,
+            'loans' => $loanController->index(),
+            'msg' => ''
+        ]);
     }
+    public function showLoan(LoanController $loanController, string $mode, int $id=null){
+        $loan = null;
 
+        if($mode != "create"){
+            $loan = $loanController->show($id);
+        }
+        
+        return view('pages.admin.loans.form', [
+            'auth' => $this->auth,
+            'loan' => $loan,
+            'mode' => $mode
+        ]);
+    }
+    public function storeLoan(LoanController $loanController, Request $request){
+        $payload = $request->all();
+
+        $payload = $request->validate([ 'name' => ['required', 'min:3'] ]);
+
+        $result = $loanController->store($request);
+        
+        return view('pages.admin.loans.index',[
+            'auth' => $this->auth,
+            'loans' => $result,
+            'msg' => "role added successfully"
+        ]);
+    }
 }
