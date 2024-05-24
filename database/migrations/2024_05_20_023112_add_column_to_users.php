@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address')->nullable()->after('photo');
 
             $table->unsignedBigInteger('role_id')->after('address');
-            $table->foreign('role_id')->references('id')->on('roles');
+            // $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 

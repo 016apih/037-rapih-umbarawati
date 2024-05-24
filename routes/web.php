@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 
 Route::get('/', function () {
@@ -17,3 +19,12 @@ Route::controller(UserController::class)->group(function () {
     Route::put("/user/{id}", "update")->name("users.update");
     Route::delete("/user/{id}", "destroy")->name("users.destroy");
 });
+
+
+Route::get('/category/create', [CategoryController::class, 'store']);
+Route::get('/category/list', [CategoryController::class, 'index']);
+Route::get('/category/detail/{id}', [CategoryController::class, 'show']);
+Route::get('/category/edit/{id}', [CategoryController::class, 'update']);
+Route::get('/category/delete/{id}', [CategoryController::class, 'destroy']);
+
+Route::get('/product/list', [ProductController::class, 'index']);
