@@ -30,7 +30,7 @@
                         <tr>
                             <th scope="row">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets/img/'.$book->img) }}" class="img-fluid rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                    <img src="{{ asset($book->img) }}" class="img-fluid rounded-circle" style="width: 80px; height: 80px;" alt="">
                                 </div>
                             </th>
                             <td>
@@ -52,9 +52,11 @@
                                 <p class="mb-0 mt-2">{{ $book->status }}</p>
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-primary mb-0 mt-2" href="#">
-                                    Borrow
-                                </a>
+                                <form action="{{ route('member.storeLoan', $book->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary mb-0 mt-2">Borrow</button>
+                                    
+                                </form>
                             </td>
                         </tr>
                     @endforeach

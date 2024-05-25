@@ -9,9 +9,9 @@ Judul Project : PemulaBooks
 Deskripsi     : Website untuk mengelola koleksi buku pribadi, mencari, meminjamkan, dan mengelola koleksi buku secara efisien
 
 Fitur :
-   HomePage (50%)
-   Authentication (50%)
-   AdminPage (48%)
+   HomePage (100%)
+   Authentication (100%)
+   AdminPage (90%)   // 10 % untuk testing
    MemberPage (30%)
 
 Rata-Rata Progress : 44.5%
@@ -20,18 +20,18 @@ last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/cdb429086869
 
 // catatan Detail
 1. homepage                   UI    Integrasi Data   Progress
-   [ ] /homepage/             [v]        [v]            50%
-   [ ] /homepage/more         [v]        [ ]            50%
-   [ ] /homepage/detail/id    [v]        [ ]            50%
+   [v] /homepage/             [v]        [v]            100%
+   [v] /homepage/more         [v]        [v]            100%
+   [v] /homepage/detail/id    [v]        [v]            100%
 2, Authentication
-   [ ] /register              [v]        [ ]            50%
-   [ ] /login                 [v]        [ ]            50%
+   [v] /register              [v]        [v]            100%
+   [v] /login                 [v]        [v]            100%
 3. Admin
-   [ ] /admin [dashboard]     [v]        [ ]            45%
-   [ ] /admin/users           [v]        [ ]            50%
-   [ ] /admin/books           [v]        [ ]            50%
-   [ ] /admin/loans           [v]        [ ]            45%
-   [ ] /admin/roles           [v]        [ ]            50%
+   [v] /admin [dashboard]     [v]        [v]            100%
+   [v] /admin/users           [v]        [v]            100%
+   [v] /admin/books           [v]        [v]            100%
+   [v] /admin/loans           [v]        [v]            100%
+   [v] /admin/roles           [v]        [v]            100%  // hidden
 3. Member
    [ ] /member/profile        [v]        [ ]            30%
    [ ] /member/activity       [v]        [ ]            30%

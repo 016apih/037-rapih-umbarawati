@@ -25,12 +25,12 @@
                     <tbody>
                         @foreach ($actiities as $activity)
                             <tr>
-                                <td>{{ $activity['loan_date'] }}</td>
-                                <td>{{ $activity['book']['title'] }}</td>
-                                <td>{{ $activity['book']['category_name'] }}</td>
-                                <td>{{ $activity['status'] }}</td>
-                                <td>{{ $activity['return_date'] }}</td>
-                                <td>{{ $activity['loan_time']  }}</td>
+                                <td>{{ $activity->loan_date }}</td>
+                                <td>{{ $activity->title }}</td>
+                                <td>{{ $activity->category_name }}</td>
+                                <td>{{ $activity->status }}</td>
+                                <td>{{ $activity->return_date }}</td>
+                                <td>{{ $activity->loan_time  }}</td>
                             </tr>
                         @endforeach
                     </tbody>

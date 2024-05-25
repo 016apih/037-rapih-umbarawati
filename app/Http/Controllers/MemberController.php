@@ -3,40 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\LoanController;
+use Carbon\Carbon;
+
+use App\Models\Loan;
+use App\Models\Book;
+
 
 class MemberController extends Controller
 {
-    private $auth;
-
-    public function __construct(UserController $userController){
-        $this->auth = $userController->show(2);
-    }
-
     public function profile(){
-        return view('pages.member.index',[
-            'auth' => $this->auth
+        return view('pages.member.index');
+    }
+
+    public function activity(){
+        return view('pages.member.activity', [
+            'actiities' => Loan::getByUserId(session()->get('userId'))
         ]);
     }
 
-    public function activity(LoanController $loanController){
-        $loan = array_filter($loanController->index(), function($val){
-            return $val['user_id'] == $this->auth['id'];
-        });
-        return view('pages.member.activity',[
-            'auth' => $this->auth,
-            'actiities' => $loan
+    public function formLoan(){
+        return view('pages.member.form-loan', [
+            'books' => Book::getList()
         ]);
     }
 
-    public function formLoan(BookController $bookController){
-        return view('pages.member.form-loan',[
-            'auth' => $this->auth,
-            'books' => $bookController->index()
+    public function storeLoan(int $bookId){
+        $book = Book::getById($bookId);
+        $now = Carbon::now();
+        $loan = Loan::create([
+            'book_id' => $book->id,
+            'user_id' => session()->get('userId'),
+            'status' => 'active',
+            'return_date' =>  $now->addDays(5)->format('Y-m-d')
         ]);
+        
+        if($loan){
+            return view('pages.member.activity', [
+                'actiities' => Loan::getByUserId(session()->get('userId'))
+            ]);
+        }
     }
 }

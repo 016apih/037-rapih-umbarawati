@@ -60,4 +60,5 @@ Route::controller(MemberController::class)->middleware(['authenticate:member'])-
     Route::get('/profile', 'profile')->name('profile');
     Route::get('/activity', 'activity')->name('activity');
     Route::get('/loans', 'formLoan')->name('loans');
+    Route::post('/loans/{bookId}', 'storeLoan')->name('storeLoan');
 });

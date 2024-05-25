@@ -39,6 +39,16 @@ class Loan extends Model
             ->first();
     }
 
+    public static function getByUserId($userId){
+        return DB::table("loans")
+            ->join("books", "books.id", "=", "loans.book_id")
+            ->join("categories", "categories.id", "=", "books.category_id")
+            ->join("users", "users.id", "=", "loans.user_id")
+            ->select('loans.*', 'users.username as username', 'books.title as title', 'categories.name as category_name')
+            ->where('loans.user_id', $userId)
+            ->get();
+    }
+
     public static function create($payload){
         $now = Carbon::now();
         $return_date = Carbon::parse($payload['return_date']);
