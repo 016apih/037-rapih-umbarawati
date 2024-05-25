@@ -30,6 +30,7 @@
                     <tr class="text-dark">
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Author</th>
                         <th scope="col">Publisher</th>
                         <th scope="col">Year</th>
@@ -40,20 +41,21 @@
                 <tbody>
                     @foreach ($books as $book)
                         <tr>
-                            <td>{{ $book['id'] }}</td>
-                            <td>{{ $book['title'] }}</td>
-                            <td>{{ $book['author'] }}</td>
-                            <td>{{ $book['publisher'] }}</td>
-                            <td>{{ $book['publication_year'] }}</td>
-                            <td>{{ $book['status'] }}</td>
+                            <td>{{ $book->id }}</td>
+                            <td>{{ $book->title }}</td>
+                            <td>{{ $book->category_name }}</td>
+                            <td>{{ $book->author }}</td>
+                            <td>{{ $book->publisher }}</td>
+                            <td>{{ $book->publication_year }}</td>
+                            <td>{{ $book->status }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.books.action', ["detail", $book['id']] ) }}">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.books.action', ["detail", $book->id] ) }}">
                                     Detail
                                 </a>
-                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.books.action', ["update", $book['id']] ) }}">
+                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.books.action', ["edit", $book->id] ) }}">
                                     Update
                                 </a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('admin.books.action', ["delete", $book['id']] ) }}">
+                                <a class="btn btn-sm btn-danger" href="{{ route('admin.books.action', ["delete", $book->id] ) }}">
                                     Delete
                                 </a>
                             </td>

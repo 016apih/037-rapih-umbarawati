@@ -15,13 +15,81 @@
                     /<span class="mx-2 text-capitalize">{{ $mode }}</span>
                 </div>
                 <h6 class="mb-4 text-capitalize"">{{ $mode }} Book</h6>
-                <form action="{{ route('admin.books.store') }}" method="POST">
+                <form
+                    @if ($mode != 'detail')
+                        action="{{ route('admin.books.'.$mode, $book == null ? null : $book->id) }}"
+                    @endif
+                    method="POST"
+                >
                     @csrf
-                    <x-form-input :itemValue="$book" :item="['name' => 'title', 'label' => 'Title', 'mode' => $mode ]" />
-                    <x-form-input :itemValue="$book" :item="['name' => 'author', 'label' => 'Author', 'mode' => $mode ]" />
-                    <x-form-input :itemValue="$book" :item="['name' => 'publisher', 'label' => 'Publisher', 'mode' => $mode ]" />
-                    <x-form-input :itemValue="$book" :item="['name' => 'publication_year', 'label' => 'Publication Year', 'mode' => $mode ]" />
-                    <x-form-input :itemValue="$book" :item="['name' => 'status', 'label' => 'Status', 'mode' => $mode ]" />
+                    @if ($book != null)
+                        @if ($mode == 'edit')
+                            @method('PUT')
+                        @else
+                            @method('DELETE')
+                        @endif
+                    @endif
+                    <x-form-select
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'category_id',
+                            'label' => 'Category',
+                            'value' => $book == null ? '' :  $book->category_id,
+                            'options' => $categories
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'title',
+                            'label' => 'Title',
+                            'value' => $book == null ? '' :  $book->title,
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'author',
+                            'label' => 'Author',
+                            'value' => $book == null ? '' :  $book->author,
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'publisher',
+                            'label' => 'Publisher',
+                            'value' => $book == null ? '' :  $book->publisher,
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'publication_year',
+                            'label' => 'Publication Year',
+                            'value' => $book == null ? '' :  $book->publication_year,
+                        ]"
+                    />
+                    <x-form-select
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'status',
+                            'label' => 'Status',
+                            'value' => $book == null ? '' :  $book->status,
+                            'options' => [
+                                (object)['id' => 'available', 'name' => 'Available'],
+                                (object)['id' => 'borrowed', 'name' => 'Borrowed']
+                            ]
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'img',
+                            'label' => 'Image',
+                            'value' => $book == null ? '' :  $book->img,
+                        ]"
+                    />
     
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">

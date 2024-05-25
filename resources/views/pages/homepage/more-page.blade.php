@@ -32,26 +32,26 @@
                     @foreach ($books as $book)
                         <tr>
                             <td>
-                                <p class="mb-0 mt-4">{{ $book['title'] }}</p>
+                                <p class="mb-0 mt-4">{{ $book->title }}</p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4">{{ $book['author'] }}</p>
+                                <p class="mb-0 mt-4">{{ $book->author }}</p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4">{{ $book['category_name'] }}</p>
+                                <p class="mb-0 mt-4">{{ $book->category_name }}</p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4">{{ $book['publisher'] }}</p>
+                                <p class="mb-0 mt-4">{{ $book->publisher }}</p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4">{{ $book['publication_year'] }}</p>
+                                <p class="mb-0 mt-4">{{ $book->publication_year }}</p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4">{{ $book['status'] }}</p>
+                                <p class="mb-0 mt-4">{{ $book->status }}</p>
                             </td>
                             <th scope="row">
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/img/{{ $book['img'] }}.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                    <img src="./assets/img/{{ $book->img }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                 </div>
                             </th>
                             

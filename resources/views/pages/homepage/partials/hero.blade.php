@@ -16,7 +16,7 @@
             <div class="col-md-12 col-lg-5">
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        @foreach ($categories as $index => $product)
+                        @foreach ($categories as $index => $category)
                         @if ($index === 1)
                             <div class="carousel-item bg:if active rounded">
                         @else
@@ -24,7 +24,7 @@
                         @endif
                                 <img src="./assets/img/hero-img-{{ $index+1 }}.jpeg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                                 <a href="#" class="btn px-4 py-2 text-white rounded">
-                                    {{ $product['name'] }}
+                                    {{ $category->name }}
                                 </a>
                             </div>
                         @endforeach

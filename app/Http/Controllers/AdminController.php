@@ -3,180 +3,246 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\LoanController;
+use App\Models\Role;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\Loan;
 
 class AdminController extends Controller
 {
-    private $users;
-    private $auth;
+    private $validateUser;
+    private $validateRole;
+    private $validateBook;
+    private $validateLoan;
 
-    private $books;
-    private $categories;
-    private $roles;
-
-    public function __construct(
-        BookController $bookController,
-        UserController $userController,
-        CategoryController $categoryController,
-        RoleController $roleController
-    ){
-        $this->users = $userController->index();
-        $this->books = $bookController->index();
-        $this->categories = $categoryController->index();
-        $this->roles = $roleController->index();
-        $this->auth = $userController->show(1);
+    public function __construct(){
+        $this->validateUser = [
+            'username' => ['required'], // 'min:3'],
+            'email' => ['required'], // 'min:1'],  // 'unique:user'
+            'no_hp' => ['required'], // 'min:11']
+            'address' => ['nullable']
+        ];
+        $this->validateRole = [ 'name' => ['required', 'min:3'] ];
+        $this->validateBook = [
+            'category_id' => ['required'], // 'min:3'],
+            'title' => ['required'], // 'min:1'],  // 'unique:user'
+            'author' => ['required'], // 'min:11']
+            'publisher' => ['required'],
+            'publication_year' => ['required'],
+            'img' => ['required'],
+            'stock' => ['nullable'],
+            'status' => ['nullable'],
+        ];
+        $this->validateLoan = [
+            'user_id' => ['required'], // 'min:3'],\
+            'book_id' => ['required'], // 'min:3'],\
+            'status' => ['required'],
+            'return_date' => ['required']
+        ];
     }
 
     public function dashboard(){
-        return view('pages.admin.index',[
-            'auth' => $this->auth
-        ]);
+        return view('pages.admin.index');
     }
 
     public function roles(){
         return view('pages.admin.roles.index',[
-            'auth' => $this->auth,
-            'roles' => $this->roles,
+            'roles' => Role::getList(),
             'msg' => ''
         ]);
     }
-    public function showRole(RoleController $roleController, string $mode, int $id=null){
-        $role = null;
+    public function showRole(string $mode, int $id=null){
 
-        if($mode != "create"){
-            $role = $roleController->show($id);
-        }
-        
         return view('pages.admin.roles.form', [
-            'auth' => $this->auth,
-            'role' => $role,
+            'role' => Role::getById($id),
             'mode' => $mode
         ]);
     }
-    public function storeRole(RoleController $roleController, Request $request){
+    public function storeRole(Request $request){
         $payload = $request->all();
 
-        $payload = $request->validate([ 'name' => ['required', 'min:3'] ]);
+        $payload = $request->validate($this->validateRole);
 
-        $result = $roleController->store($request);
+        $role = Role::create($payload);
         
         return view('pages.admin.roles.index',[
-            'auth' => $this->auth,
-            'roles' => $result,
+            'roles' => Role::getList(),
             'msg' => "role added successfully"
         ]);
     }
+    public function updateRole(Request $request, int $id=null){
+        $payload = $request->all();
+        $payload = $request->validate($this->validateRole);
 
+        $role = Role::update_($payload, $id);
+        
+        return view('pages.admin.roles.index',[
+            'roles' => Role::getList(),
+            'msg' => "role Edited successfully"
+        ]);
+    }
+    public function destroyRole(int $id){
+        $role = Role::delete_($id);
+        
+        return view('pages.admin.roles.index',[
+            'roles' => Role::getList(),
+            'msg' => "role deleted successfully"
+        ]);
+    }
 
     public function users(){
         return view('pages.admin.users.index',[
-            'auth' => $this->auth,
-            'users' => $this->users,
+            'users' => User::getList(),
             'msg' => ''
         ]);
     }
-    public function showUser(UserController $userController, string $mode, int $id=null){
-        $user = null;
-
-        if($mode != "create"){
-            $user = $userController->show($id);
-        }
+    public function showUser(string $mode, int $id=null){
         
         return view('pages.admin.users.form', [
-            'auth' => $this->auth,
-            'user' => $user,
-            'roles' => $this->roles,
+            'user' => ser::getById($id),
+            'roles' => Role::getList(),
             'mode' => $mode
         ]);
     }
-    public function storeUser(UserController $userController, Request $request){
+    public function storeUser(Request $request){
         $payload = $request->all();
+        
+        $payload = $request->validate($this->validateUser);
 
-        $payload = $request->validate([ 'name' => ['required', 'min:3'] ]);
+        $user = User::create($payload);
 
-        $result = $userController->store($request);
+        if($user){
+            return view('pages.admin.users.index',[
+                'users' => User::getList(),
+                'msg' => "user added successfully"
+            ]);
+        }
+        
+    }
+    public function updateUser(Request $request, int $id=null){
+        $payload = $request->all();
+        $payload = $request->validate($this->validateUser);
+
+        $user = User::update_($payload, $id);
         
         return view('pages.admin.users.index',[
-            'auth' => $this->auth,
-            'users' => $result,
-            'msg' => "user added successfully"
+            'users' => User::getList(),
+            'msg' => "User Edited successfully"
+        ]);
+    }
+    public function destroyUser(int $id){
+        $user = User::delete_($id);
+        
+        return view('pages.admin.users.index',[
+            'users' => User::getList(),
+            'msg' => "role deleted successfully"
         ]);
     }
 
     public function books(){
-        return view('pages.admin.books.index',[
-            'auth' => $this->auth,
-            'books' => $this->books,
+        return view('pages.admin.books.index', [
+            'books' => Book::getList(),
             'msg' => ''
         ]);
     }
-    public function showBook(BookController $bookController, string $mode, int $id=null){
-        $book = null;
-
-        if($mode != "create"){
-            $book = $bookController->show($id);
-        }
+    public function showBook(string $mode, int $id=null){
         
         return view('pages.admin.books.form', [
-            'auth' => $this->auth,
-            'book' => $book,
+            'book' => Book::getById($id),
+            'categories' => Category::getList(),
             'mode' => $mode
         ]);
     }
-    public function storeBook(BookController $bookController, Request $request){
+    public function storeBook(Request $request){
         $payload = $request->all();
-
-        $payload = $request->validate([ 'name' => ['required', 'min:3'] ]);
-
-        $result = $bookController->store($request);
         
-        return view('pages.admin.books.index',[
-            'auth' => $this->auth,
-            'books' => $result,
-            'msg' => "role added successfully"
-        ]);
-    }
-
-    public function loans(LoanController $loanController){
-        return view('pages.admin.loans.index',[
-            'auth' => $this->auth,
-            'loans' => $loanController->index(),
-            'msg' => ''
-        ]);
-    }
-    public function showLoan(LoanController $loanController, string $mode, int $id=null){
+        $payload = $request->validate($this->validateBook);
         
-        if($mode == "create"){
-            return view('pages.admin.loans.create', [
-                'auth' => $this->auth,
-                'mode' => $mode
-            ]);
-        } else {
-            $loan = null;
-            $loan = $loanController->show($id);
-            return view('pages.admin.loans.form', [
-                'auth' => $this->auth,
-                'loan' => $loan,
-                'mode' => $mode
+        $book = Book::create($payload);
+
+        if($book){
+            return view('pages.admin.books.index',[
+                'books' => Book::getList(),
+                'msg' => "Book added successfully"
             ]);
         }
         
     }
-    public function storeLoan(LoanController $loanController, Request $request){
+    public function updateBook(Request $request, int $id=null){
+        $payload = $request->all();
+        $payload = $request->validate($this->validateBook);
+
+        $book = Book::update_($payload, $id);
+        
+        if($book){
+            return view('pages.admin.books.index',[
+                'books' => Book::getList(),
+                'msg' => "Book updated successfully"
+            ]);
+        }
+    }
+    public function destroyBook(int $id){
+        $book = Book::delete_($id);
+        
+        if($book){
+            return view('pages.admin.books.index',[
+                'books' => Book::getList(),
+                'msg' => "Book deleted successfully"
+            ]);
+        }
+    }
+
+    public function loans(){
+        return view('pages.admin.loans.index',[
+            'loans' => Loan::getList(),
+            'msg' => ''
+        ]);
+    }
+    public function showLoan(string $mode, int $id=null){
+        
+        return view('pages.admin.loans.form', [
+            'loan' => Loan::getById($id),
+            'books' => Book::getList(),
+            'users' => User::getList(),
+            'mode' => $mode
+        ]);
+    }
+    public function storeLoan(Request $request){
         $payload = $request->all();
 
-        $payload = $request->validate([ 'name' => ['required', 'min:3'] ]);
+        $payload = $request->validate($this->validateLoan);
 
-        $result = $loanController->store($request);
+        $loan = Loan::create($payload);
+
+        if($loan){
+            return view('pages.admin.loans.index',[
+                'loans' => Loan::getList(),
+                'msg' => "Loan added successfully"
+            ]);
+        }
+    }
+    public function updateLoan(Request $request, int $id=null){
+        $payload = $request->all();
+        $payload = $request->validate($this->validateLoan);
+
+        $loan = Loan::update_($payload, $id);
         
-        return view('pages.admin.loans.index',[
-            'auth' => $this->auth,
-            'loans' => $result,
-            'msg' => "role added successfully"
-        ]);
+        if($loan){
+            return view('pages.admin.loans.index',[
+                'loans' => Loan::getList(),
+                'msg' => "Loan updated successfully"
+            ]);
+        }
+    }
+    public function destroyLoan(int $id){
+        $loan = Loan::delete_($id);
+        
+        if($loan){
+            return view('pages.admin.Loans.index',[
+                'loans' => Loan::getList(),
+                'msg' => "Loan deleted successfully"
+            ]);
+        }
     }
 }

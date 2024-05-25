@@ -41,21 +41,21 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user['id'] }}</td>
-                            <td>{{ $user['username'] }}</td>
-                            <td>{{ $user['email'] }}</td>
-                            <td>{{ $user['role_name'] }}</td>
-                            <td>{{ $user['no_hp'] }}</td>
-                            <td>{{ $user['address'] }}</td>
-                            <td>{{ $user['created_at'] }}</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role_name }}</td>
+                            <td>{{ $user->no_hp }}</td>
+                            <td>{{ $user->address }}</td>
+                            <td>{{ $user->created_at }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.users.action', ["detail", $user['id']] ) }}">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.users.action', ["detail", $user->id] ) }}">
                                     Detail
                                 </a>
-                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.users.action', ["update", $user['id']] ) }}">
+                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.users.action', ["edit", $user->id] ) }}">
                                     Update
                                 </a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('admin.users.action', ["delete", $user['id']] ) }}">
+                                <a class="btn btn-sm btn-danger" href="{{ route('admin.users.action', ["delete", $user->id] ) }}">
                                     Delete
                                 </a>
                             </td>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('publisher');
             $table->string('publication_year');
             $table->integer('stock');
-            $table->enum('status', ['availabe', '']);
+            $table->enum('status', ['available', 'borrowed']);
             $table->string('img')->nullable();
             $table->timestamps();
 

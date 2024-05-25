@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -9,21 +10,7 @@ class CategoryController extends Controller
     private $categories;
 
     public function __construct(){
-        $this->categories = [
-            [
-                'id' => 1,
-                'name' => 'Self Dev',
-                'created_at' =>  '15/05/2024',
-            ], [
-                'id' => 2,
-                'name' => 'Agama',
-                'created_at' =>  '15/05/2024',
-            ], [
-                'id' => 3,
-                'name' => 'Novel',
-                'created_at' =>  '15/05/2024',
-            ]
-        ];
+
     }
     
     /**
@@ -31,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return $this->categories;
+        return Category::all();
     }
 
     /**
@@ -55,7 +42,13 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $result = Category::find($id);
+
+        if (!$result) {
+            $result = null;
+        }
+
+        return $result;
     }
 
     /**

@@ -37,17 +37,17 @@
                 <tbody>
                     @foreach ($roles as $role)
                         <tr>
-                            <td>{{ $role['id'] }}</td>
-                            <td>{{ $role['name'] }}</td>
-                            <td>{{ $role['created_at'] }}</td>
+                            <td>{{ $role->id }}</td>
+                            <td>{{ $role->name }}</td>
+                            <td>{{ $role->created_at }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.roles.action', ["detail", $role['id']] ) }}">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.roles.action', ["detail", $role->id] ) }}">
                                     Detail
                                 </a>
-                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.roles.action', ["update", $role['id']] ) }}">
+                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.roles.action', ["edit", $role->id] ) }}">
                                     Update
                                 </a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('admin.roles.action', ["delete", $role['id']] ) }}">
+                                <a class="btn btn-sm btn-danger" href="{{ route('admin.roles.action', ["delete", $role->id] ) }}">
                                     Delete
                                 </a>
                             </td>

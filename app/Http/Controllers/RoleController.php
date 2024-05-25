@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -9,17 +10,7 @@ class RoleController extends Controller
     private $roles;
 
     public function __construct(){
-        $this->roles = [
-            [
-                'id' => 1,
-                'name' => 'admin',
-                'created_at' => '15/05/2024',
-            ],[
-                'id' => 2,
-                'name' => 'member',
-                'created_at' => '15/05/2024',
-            ],
-        ];
+
     }
     
     /**
@@ -27,7 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return $this->roles;
+        return Book::all();
     }
 
     /**
@@ -59,12 +50,10 @@ class RoleController extends Controller
      */
     public function show(int $id)
     {
-        $result = null;
+        $result = Book::find($id);
 
-        foreach($this->roles as $role){
-            if($role['id'] == $id){
-                $result = $role;
-            }
+        if (!$result) {
+            $result = null;
         }
         return $result;
     }

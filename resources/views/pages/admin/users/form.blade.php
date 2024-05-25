@@ -15,62 +15,62 @@
                     /<span class="mx-2 text-capitalize">{{ $mode }}</span>
                 </div>
                 <h6 class="mb-4 text-capitalize"">{{ $mode }} User</h6>
-                <form action="{{ route('admin.users.store') }}" method="POST">
+                <form
+                    @if ($mode != 'detail')
+                        action="{{ route('admin.users.'.$mode, $user == null ? null : $user->id) }}"
+                    @endif
+                    method="POST"
+                >
                     @csrf
-                    <fieldset class="row mb-3">
-                        <legend class="col-form-label col-sm-2 pt-0">Roles</legend>
-                        <div class="col-sm-10">
-                            @foreach ($roles as $role)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gridRadios"
-                                        id="gridRadios{{ $role['id'] }}" value="{{ $role['id'] }}"
-                                        @if($mode !== "create" &&  $role['id'] == $user['role_id']) checked @endif
-                                        @if($mode == "detail" || $mode == "delete") disabled @endif
-                                    >
-                                    <label class="form-check-label" for="gridRadios1">
-                                        {{ $role['name'] }}
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                    </fieldset>
-                    <div class="row mb-3">
-                        <label for="username" class="col-sm-2 col-form-label">Username</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="username" class="form-control" id="username"
-                                @if($mode !== "create") value="{{ $user['username'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" name="email" class="form-control" id="email"
-                                @if($mode !== "create") value="{{ $user['email'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="no_hp" class="col-sm-2 col-form-label">No Hp</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="no_hp" class="form-control" id="no_hp"
-                                @if($mode !== "create") value="{{ $user['no_hp'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="address" class="col-sm-2 col-form-label">Address</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" placeholder="Address" id="address" style="height: 150px;"
-                                @if($mode !== "create") value="{{ $user['address'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                            </textarea>
-                        </div>
-                    </div>
+                    @if ($user != null)
+                        @if ($mode == 'edit')
+                            @method('PUT')
+                        @else
+                            @method('DELETE')
+                        @endif
+                    @endif
+
+                    {{-- <x-form-select
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'role_id',
+                            'label' => 'Role',
+                            'value' => $user == null ? 'aa' :  $user->role_id,
+                            'options' => $roles
+                        ]"
+                    /> --}}
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'username',
+                            'label' => 'Username',
+                            'value' => $user == null ? '' :  $user->username,
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'email',
+                            'label' => 'Email',
+                            'value' => $user == null ? '' :  $user->email,
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'no_hp',
+                            'label' => 'No Hp',
+                            'value' => $user == null ? '' :  $user->no_hp,
+                        ]"
+                    />
+                    <x-form-textarea
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'address',
+                            'label' => 'Address',
+                            'value' => $user == null ? '' :  $user->address,
+                        ]"
+                    />
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">
                             {{ $mode }}

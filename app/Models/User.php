@@ -71,13 +71,40 @@ class User extends Authenticatable
     }
 
     public static function create($payload){
+        $now = Carbon::now();
+        $password = $payload['password'] ?? "password";
+        $role_id = $payload['role_id'] ?? 2;
+
         return DB::table('users')->insert([
-            'role_id' => 2,
+            'role_id' => $role_id,
             'username' => $payload['username'],
             'email' => $payload['email'],
-            'password' => Hash::make($payload['password']),
+            'password' => Hash::make($password),
             'address' => $payload['address'],
             'no_hp' => $payload['no_hp'],
+            'created_at' => $now,
         ]);
+    }
+
+    public static function update_($payload, $id){
+        $now = Carbon::now();
+        $password = $payload['password'] ?? "password";
+
+        return DB::table('users')
+            ->where('users.id', $id)
+            ->update([
+                'username' => $payload['username'],
+                'email' => $payload['email'],
+                'password' => Hash::make($password),
+                'address' => $payload['address'],
+                'no_hp' => $payload['no_hp'],
+                'updated_at' => $now,
+            ]);
+    }
+
+    public static function delete_($id){
+        return DB::table('users')
+            ->where('users.id', $id)
+            ->delete();
     }
 }

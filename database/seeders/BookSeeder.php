@@ -23,8 +23,8 @@ class BookSeeder extends Seeder
                 'publisher' => 'Qultum Media',
                 'publication_year' => '2017',
                 'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-4.jpg',
+                'status' => 'available',
+                'img' => 'assets/img/book-item-4.jpg',
                 // 'created_at' => '2024-05-15 00:00:00',
             ], [
                 'id' => 2,
@@ -35,8 +35,8 @@ class BookSeeder extends Seeder
                 'publisher' => 'Zaduna',
                 'publication_year' => '2022',
                 'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-5.jpg',
+                'status' => 'available',
+                'img' => 'assets/img/book-item-5.jpg',
                 // 'created_at' => '2024-05-15 00:00:00',
             ], [
                 'id' => 3,
@@ -47,8 +47,8 @@ class BookSeeder extends Seeder
                 'publisher' => 'Darul Haq',
                 'publication_year' => '2016',
                 'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-3.jpg',
+                'status' => 'available',
+                'img' => 'assets/img/book-item-3.jpg',
                 // 'created_at' => '2024-05-15 00:00:00',
             ], [
                 'id' => 4,
@@ -59,8 +59,8 @@ class BookSeeder extends Seeder
                 'publisher' => 'Mizan',
                 'publication_year' => '2022',
                 'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-1.jpg',
+                'status' => 'available',
+                'img' => 'assets/img/book-item-1.jpg',
                 // 'created_at' => '2024-05-15 00:00:00',
             ], [
                 'id' => 5,
@@ -71,8 +71,8 @@ class BookSeeder extends Seeder
                 'publisher' => 'Noura Books',
                 'publication_year' => '2022',
                 'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-2.jpg',
+                'status' => 'available',
+                'img' => 'assets/img/book-item-2.jpg',
                 // 'created_at' => '2024-05-15 00:00:00',
             ]
         ];

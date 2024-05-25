@@ -13,8 +13,8 @@
                                 <span class="text-dark" style="width: 130px;">All Books</span>
                             </a>
                         </li>
-                        @foreach ($categories as $index => $product)
-                            <x-book.category-item :name="$product['name']" href="#tab-{{ $index + 2 }}" />
+                        @foreach ($categories as $index => $category)
+                            <x-book.category-item :name="$category->name" href="#tab-{{ $index + 2 }}" />
                         @endforeach
                         <li class="nav-item">
                             <a href="{{ route('homepage.more') }}" class="d-flex py-2 m-2 bg-light rounded-pill">
@@ -43,7 +43,7 @@
                             <div class="col-lg-12">
                                 <div class="row g-4">
                                     @foreach ($books as $book)
-                                        @if ($book['category_name'] == $category['name'])
+                                        @if ($book->category_name == $category->name)
                                             <x-book.card :book="$book" />
                                         @endif
                                     @endforeach

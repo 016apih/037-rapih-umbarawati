@@ -15,7 +15,7 @@
                 <div class="d-flex m-3 me-0">
                     {{-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> --}}
                     <button class="btn-search btn border border-secondary px-4 btn-xl-square rounded-md bg-white me-4">
-                        <a href="{{ route('login') }}">
+                        <a href="{{ route('auth.loginPage') }}">
                             <i class="fas fa-sign-in-alt"></i>
                             Login
                         </a>

@@ -15,17 +15,28 @@
                     /<span class="mx-2 text-capitalize">{{ $mode }}</span>
                 </div>
                 <h6 class="mb-4 text-capitalize"">{{ $mode }} Role</h6>
-                <form action="{{ route('admin.roles.store') }}" method="POST">
+                @if ($mode != 'detail')
+                    <form action="{{ route('admin.roles.'.$mode, $role == null ? null : $role->id) }}" method="POST">
+                @endif
                     @csrf
-                    <div class="row mb-3">
-                        <label for="name" class="col-sm-2 col-form-label">Role</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" id="name"
-                                @if($mode !== "create") value="{{ $role['name'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                        </div>
-                    </div>
+
+                    @if ($role != null)
+                        @if ($mode == 'edit')
+                            @method('PUT')
+                        @else
+                            @method('DELETE')
+                        @endif
+                    @endif
+
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'name',
+                            'label' => 'Role',
+                            'value' => $role == null ? '' :  $role->name,
+                        ]"
+                    />
+                    
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">
                             {{ $mode }}

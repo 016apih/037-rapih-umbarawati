@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\UserController;
@@ -13,35 +14,8 @@ class LoanController extends Controller
 {
     private $loans;
 
-    public function __construct(
-        BookController $bookController,
-        UserController $userController
-    ){
-        $this->loans = [
-            [
-                'id' => 1,
-                'book_id' => 1,
-                'book' => $bookController->show(1),
-                'user_id' => 2,
-                'user' => $userController->show(2),
-                'loan_date' => '17/05/2024',
-                'status' => 'active',
-                'return_date' => '19/05/2024',
-                'loan_time' => 2,
-                'created_at' => '17/05/2024',
-            ],  [
-                'id' => 2,
-                'book_id' => 2,
-                'book' => $bookController->show(2),
-                'user_id' => 2,
-                'user' => $userController->show(2),
-                'loan_date' => '17/05/2024',
-                'status' => 'active',
-                'return_date' => '19/05/2024',
-                'loan_time' => 2,
-                'created_at' => '17/05/2024',
-            ],
-        ];
+    public function __construct(){
+        
     }
 
     /**
@@ -49,7 +23,7 @@ class LoanController extends Controller
      */
     public function index()
     {
-        return $this->loans;
+        return Loan::all();
     }
 
     /**
@@ -73,12 +47,10 @@ class LoanController extends Controller
      */
     public function show(int $id)
     {
-        $result = null;
+        $result = Loan::find($id);
 
-        foreach($this->loans as $loan){
-            if($loan['id'] == $id){
-                $result = $loan;
-            }
+        if (!$result) {
+            $result = null;
         }
         return $result;
     }

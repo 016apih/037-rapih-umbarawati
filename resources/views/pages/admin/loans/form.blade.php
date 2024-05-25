@@ -15,23 +15,69 @@
                     /<span class="mx-2 text-capitalize">{{ $mode }}</span>
                 </div>
                 <h6 class="mb-4 text-capitalize"">{{ $mode }} Loan</h6>
-                <form action="{{ route('admin.loans.store') }}" method="POST">
+                <form
+                    @if ($mode != 'detail')
+                        action="{{ route('admin.loans.'.$mode, $loan == null ? null : $loan->id) }}"
+                    @endif
+                    method="POST"
+                >
                     @csrf
-                    
-                    {{-- <div class="row mb-3">
-                        <label for="name" class="col-sm-2 col-form-label">Loan</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" id="name"
-                                @if($mode !== "create") value="{{ $loan['name'] }}" @endif
-                                @if($mode == "detail" || $mode == "delete") readonly @endif
-                            >
-                        </div>
-                    </div> --}}
+                    @if ($loan != null)
+                        @if ($mode == 'edit')
+                            @method('PUT')
+                        @else
+                            @method('DELETE')
+                        @endif
+                    @endif
 
-                    <x-form-input :itemValue="$loan['book']['title']" :item="['name' => 'book', 'label' => 'Book', 'mode' => $mode ]" />
-                    {{-- <x-form-input :item="['name' => 'book', 'label' => 'Book', 'mode' => $mode ]" /> --}}
-
-
+                    <x-form-select
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'book_id',
+                            'label' => 'Title',
+                            'value' => $loan == null ? '' :  $loan->book_id,
+                            'options' => $books
+                        ]"
+                    />
+                    <x-form-select
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'user_id',
+                            'label' => 'User',
+                            'value' => $loan == null ? '' :  $loan->user_id,
+                            'options' => $users
+                        ]"
+                    />
+                    <x-form-select
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'status',
+                            'label' => 'Status',
+                            'value' => $loan == null ? '' :  $loan->status,
+                            'options' => [
+                                (object)['id' => 'active', 'name' => 'Active'],
+                                (object)['id' => 'late', 'name' => 'Late'],
+                                (object)['id' => 'return', 'name' => 'Return']
+                            ]
+                        ]"
+                    />
+                    <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'type' => 'date',
+                            'name' => 'return_date',
+                            'label' => 'Return Date',
+                            'value' => $loan == null ? '' :  $loan->return_date,
+                        ]"
+                    />
+                    {{-- <x-form-input
+                        :item="[
+                            'mode' => $mode,
+                            'name' => 'loan_time',
+                            'label' => 'Days',
+                            'value' => $loan == null ? '' :  $loan->loan_time,
+                        ]"
+                    /> --}}
 
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">

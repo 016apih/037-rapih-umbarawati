@@ -13,23 +13,33 @@
                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
-               <h6 class="mb-0">{{ $auth['username'] }}</h6>
-               <span>{{ $auth['role_name'] }}</span>
+               <h6 class="mb-0">
+                  @if (session()->get('username'))
+                     {{ session()->get('username') }}
+                  @endif
+               </h6>
+               <span>
+                  @if (session()->get('role'))
+                     {{ session()->get('role') }}
+                  @endif
+               </span>
             </div>
          </div>
          <div class="navbar-nav w-100">
-            @if ($auth['role_id'] == 1)
-               <x-item-sidebar :item='["admin.dashboard", "fa fa-tachometer-alt", "Dashboard"]' />
-               <x-item-sidebar :item='["admin.roles", "fas fa-user-cog", "Roles"]' />
-               <x-item-sidebar :item='["admin.users", "fas fa-users", "Users"]' />
-               <x-item-sidebar :item='["admin.books", "fas fa-book", "Books"]' />
-               <x-item-sidebar :item='["admin.loans", "fas fa-exchange-alt", "Loans"]' />
-
-               @else
-               <i class=""></i>
-                  <x-item-sidebar :item='["member.profile", "fas fa-user-cog", "My Profile"]' />
-                  <x-item-sidebar :item='["member.activity", "fas fa-clipboard-list", "Loan Activity"]' />
-                  <x-item-sidebar :item='["member.loans", "fas fa-users", "Form Loan"]' />
+            @if (session()->get('role'))
+               @if(session()->get('role') == 'admin')
+                  <x-item-sidebar :item='["admin.dashboard", "fa fa-tachometer-alt", "Dashboard"]' />
+                  {{-- <x-item-sidebar :item='["admin.roles", "fas fa-user-cog", "Roles"]' /> --}}
+                  <x-item-sidebar :item='["admin.users", "fas fa-users", "Users"]' />
+                  <x-item-sidebar :item='["admin.books", "fas fa-book", "Books"]' />
+                  <x-item-sidebar :item='["admin.loans", "fas fa-exchange-alt", "Loans"]' />
+   
+                  @else
+                  <i class=""></i>
+                     <x-item-sidebar :item='["member.profile", "fas fa-user-cog", "My Profile"]' />
+                     <x-item-sidebar :item='["member.activity", "fas fa-clipboard-list", "Loan Activity"]' />
+                     <x-item-sidebar :item='["member.loans", "fas fa-users", "Form Loan"]' />
+               @endif
             @endif
       
          </div>

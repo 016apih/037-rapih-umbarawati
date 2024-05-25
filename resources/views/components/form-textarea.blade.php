@@ -7,10 +7,10 @@
       {{ $item['label'] }}
    </label>
    <div class="col-sm-10">
-      <input name="{{ $item['name'] }}" class="form-control" id="{{ $item['name'] }}"
-      type="{{ $item['type'] ?? 'text' }}"
-         value="{{ $item['value'] }}"
+      <textarea name="{{ $item['name']}}" class="form-control px-0" placeholder="Address" id={{ $item['name']}} style="height: 150px;"
          @if($item['mode'] == "detail" || $item['mode'] == "delete") readonly @endif
       >
+      {{ $item['value'] }}
+      </textarea>
    </div>
 </div>

@@ -2,86 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    private $books;
-
     public function __construct(){
-        $this->books = [
-            [
-                'id' => 1,
-                'user_id' => 1,
-                'username' => 'Admin',
-                'category_id' => 1,
-                'category_name' => 'Self Dev',
-                'title' => 'I Have A Dream',
-                'author' => 'Arif Rahman Lubis',
-                'publisher' => 'Qultum Media',
-                'publication_year' => '2017',
-                'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-4',
-                'created_at' => '15/05/2024',
-            ], [
-                'id' => 2,
-                'user_id' => 1,
-                'username' => 'Admin',
-                'category_id' => 2,
-                'category_name' => 'Agama',
-                'title' => 'Tadabbur Bacaan Shalat',
-                'author' => 'Ibnu Abdil Bari',
-                'publisher' => 'Zaduna',
-                'publication_year' => '2022',
-                'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-5',
-                'created_at' => '15/05/2024',
-            ], [
-                'id' => 3,
-                'user_id' => 1,
-                'username' => 'Admin',
-                'category_id' => 2,
-                'category_name' => 'Agama',
-                'title' => 'Sifat Shalat Nabi SAW',
-                'author' => 'Syaikh Muhammad Nashiruddin al-Abani',
-                'publisher' => 'Darul Haq',
-                'publication_year' => '2016',
-                'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-3',
-                'created_at' => '15/05/2024',
-            ], [
-                'id' => 4,
-                'user_id' => 1,
-                'username' => 'Admin',
-                'category_id' => 2,
-                'category_name' => 'Agama',
-                'title' => 'Seni Merayu Tuhan',
-                'author' => "Husein Ja far Al - Hadar",
-                'publisher' => 'Mizan',
-                'publication_year' => '2022',
-                'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-1',
-                'created_at' => '15/05/2024',
-            ], [
-                'id' => 5,
-                'user_id' => 1,
-                'username' => 'Admin',
-                'category_id' => 2,
-                'category_name' => 'Agama',
-                'title' => 'Tuhan Ada Di Hatimu',
-                'author' => "Husein Ja far Al - Hadar",
-                'publisher' => 'Noura Books',
-                'publication_year' => '2022',
-                'stock' => 1,
-                'status' => 'availabe',
-                'img' => 'book-item-2',
-                'created_at' => '15/05/2024',
-            ]
-        ];
     }
     
     /**
@@ -89,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return $this->books;
+        return Book::getList();
     }
 
     /**
@@ -113,12 +39,10 @@ class BookController extends Controller
      */
     public function show(int $id)
     {
-        $result = null;
+        $result = Book::find($id);
 
-        foreach($this->books as $book){
-            if($book['id'] == $id){
-                $result = $book;
-            }
+        if (!$result) {
+            $result = null;
         }
         return $result;
     }

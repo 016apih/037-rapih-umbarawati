@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\RoleController;
@@ -11,29 +12,6 @@ class UserController extends Controller
     private $users;
 
     public function __construct(RoleController $roleController){
-        $this->users = [
-            [
-                'id' => 1,
-                'role_id' => 1,
-                'role_name' => $roleController->show(1)['name'], // JOIN Table
-                'username' => 'Akun Admin',
-                'email' => 'admin@gmail.com',
-                'password' => 'password',
-                'address' => "alamat",
-                'no_hp' => '08963456789',
-                'created_at' => '15/05/2024',
-            ],[
-                'id' => 2,
-                'role_id' => 2,
-                'role_name' =>  $roleController->show(2)['name'], // JOIN Table,
-                'username' => 'Akun Member',
-                'email' => 'member@gmail.com',
-                'password' => 'password',
-                'address' => "alamat",
-                'no_hp' => '08963456789',
-                'created_at' => '15/05/2024',
-            ]
-        ];
     }
     
     /**
@@ -41,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return $this->users;
+        return User::all();
     }
 
     /**
@@ -65,13 +43,12 @@ class UserController extends Controller
      */
     public function show(int $id)
     {
-        $result = null;
+        $result = User::find($id);
 
-        foreach($this->users as $user){
-            if($user['id'] == $id){
-                $result = $user;
-            }
+        if (!$result) {
+            $result = null;
         }
+
         return $result;
     }
 

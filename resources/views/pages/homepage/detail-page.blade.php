@@ -13,7 +13,7 @@
                 <div class="row g-4">
                     <div class="col-lg-12">
                         <div class="border rounded">
-                            <img src="{{ asset('./assets/img/'.$book['img'].'.jpg') }}" class="img-fluid rounded" alt="img" />
+                            <img src="{{ asset($book->img) }}" class="img-fluid rounded" alt="img" />
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         </nav>
                         <div class="tab-content mb-5">
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                <h4 class="fw-bold mb-3">{{ $book['title'] }}</h4>
+                                <h4 class="fw-bold mb-3">{{ $book->title }}</h4>
                                 <div class="px-2">
                                     <div class="row g-4">
                                         <div class="col-10">
@@ -48,7 +48,7 @@
                                                     <p class="mb-0">Author</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="mb-0">{{ $book['author'] }}</p>
+                                                    <p class="mb-0">{{ $book->author }}</p>
                                                 </div>
                                             </div>
                                             <div class="row align-items-center text-center justify-content-center py-2">
@@ -56,7 +56,7 @@
                                                     <p class="mb-0">Category</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="mb-0">{{ $book['category_name'] }}</p>
+                                                    <p class="mb-0">{{ $book->category_name }}</p>
                                                 </div>
                                             </div>
                                             <div class="row bg-light text-center align-items-center justify-content-center py-2">
@@ -64,7 +64,7 @@
                                                     <p class="mb-0">Publisher</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="mb-0">{{ $book['publisher'] }}</p>
+                                                    <p class="mb-0">{{ $book->publisher }}</p>
                                                 </div>
                                             </div>
                                             <div class="row text-center align-items-center justify-content-center py-2">
@@ -72,7 +72,7 @@
                                                     <p class="mb-0">Publication Year</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="mb-0">{{ $book['publication_year'] }}</p>
+                                                    <p class="mb-0">{{ $book->publication_year }}</p>
                                                 </div>
                                             </div>
                                             <div class="row bg-light text-center align-items-center justify-content-center py-2">
@@ -80,7 +80,7 @@
                                                     <p class="mb-0">Status</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="mb-0">{{ $book['status'] }}</p>
+                                                    <p class="mb-0">{{ $book->status }}</p>
                                                 </div>
                                             </div>
                                             <div class="row text-center align-items-center justify-content-center py-2">
@@ -88,7 +88,7 @@
                                                     <p class="mb-0">Book owner</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="mb-0">{{ $book['username'] }}</p>
+                                                    <p class="mb-0">{{ $book->username }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                 <h1 class="fw-bold mb-0">Related books category</h1>
                 <div class="owl-carousel vegetable-carousel justify-content-center">
                     @foreach ($books as $item)
-                        @if ($item['category_name'] == $book['category_name'])
+                        @if ($item->category_name == $book->category_name)
                             <x-book.card-carousel :book="$item" />
                         @endif
                     @endforeach

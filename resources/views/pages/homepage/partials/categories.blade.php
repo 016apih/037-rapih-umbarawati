@@ -12,7 +12,7 @@
                         <div class="col-md-6 col-lg-6 col-xl-3">
                             <div class="counter bg-white rounded p-5">
                                 <i class="fas fa-book-open text-secondary"></i>
-                                <h4>{{ $category['name'] }}</h4>
+                                <h4>{{ $category->name }}</h4>
                             </div>
                         </div>
                     @endforeach

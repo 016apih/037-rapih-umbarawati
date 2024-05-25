@@ -38,22 +38,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($loans as $loan)
+                    @foreach ($loans as $index => $loan)
                         <tr>
-                            <td>{{ $loan['id'] }}</td>
-                            <td>{{ $loan['user']['username'] }}</td>
-                            <td>{{ $loan['book']['title'] }}</td>
-                            <td>{{ $loan['loan_date'] }}</td>
-                            <td>{{ $loan['return_date'] }}</td>
-                            <td>{{ $loan['status'] }}</td>
+                            <td>{{ $index + 1}}</td>
+                            <td>{{ $loan->username }}</td>
+                            <td>{{ $loan->title }}</td>
+                            <td>{{ $loan->loan_date }}</td>
+                            <td>{{ $loan->return_date }}</td>
+                            <td>{{ $loan->status }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.loans.action', ["detail", $loan['id']] ) }}">
+                                <a class="btn btn-sm btn-primary" href="{{ route('admin.loans.action', ["detail", $loan->id] ) }}">
                                     Detail
                                 </a>
-                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.loans.action', ["update", $loan['id']] ) }}">
+                                <a class="btn btn-sm btn-secondary" href="{{ route('admin.loans.action', ["edit", $loan->id] ) }}">
                                     Update
                                 </a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('admin.loans.action', ["delete", $loan['id']] ) }}">
+                                <a class="btn btn-sm btn-danger" href="{{ route('admin.loans.action', ["delete", $loan->id] ) }}">
                                     Delete
                                 </a>
                             </td>
