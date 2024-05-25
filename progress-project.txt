@@ -11,12 +11,12 @@ Deskripsi     : Website untuk mengelola koleksi buku pribadi, mencari, meminjamk
 Fitur :
    HomePage (100%)
    Authentication (100%)
-   AdminPage (90%)   // 10 % untuk testing
-   MemberPage (30%)
+   AdminPage (90%)   // 10% untuk testing
+   MemberPage (90%) // 10% untuk testing
 
-Rata-Rata Progress : 44.5%
+Rata-Rata Progress : 95%
 
-last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/cdb42908686939ff6970522c1c6530284c0c61cb
+last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/81df47f6abf9e3623527b7218ddaa607d7ad3280
 
 // catatan Detail
 1. homepage                   UI    Integrasi Data   Progress
@@ -33,6 +33,6 @@ last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/cdb429086869
    [v] /admin/loans           [v]        [v]            100%
    [v] /admin/roles           [v]        [v]            100%  // hidden
 3. Member
-   [ ] /member/profile        [v]        [ ]            30%
-   [ ] /member/activity       [v]        [ ]            30%
-   [ ] /member/form-loan      [v]        [ ]            30%
+   [v] /member/profile        [v]        [v]            100%
+   [v] /member/activity       [v]        [v]            100%
+   [v] /member/form-loan      [v]        [v]            100%
