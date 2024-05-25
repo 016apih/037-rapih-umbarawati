@@ -20,7 +20,7 @@ last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/cdb429086869
 
 // catatan Detail
 1. homepage                   UI    Integrasi Data   Progress
-   [ ] /homepage/             [v]        [ ]            50%
+   [ ] /homepage/             [v]        [v]            50%
    [ ] /homepage/more         [v]        [ ]            50%
    [ ] /homepage/detail/id    [v]        [ ]            50%
 2, Authentication
