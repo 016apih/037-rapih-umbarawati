@@ -18,7 +18,8 @@ class HomepageController extends Controller
     public function more(){
         return view('pages.homepage.more-page', [
             'books' => Book::getList(),
-            'categories' => Category::getList()
+            'categories' => Category::getList(),
+            'keyword' => null
         ]);
     }
 
@@ -29,10 +30,20 @@ class HomepageController extends Controller
             return view('pages.homepage.404');
         } else {
             return view('pages.homepage.detail-page', [
-                'books' => Book::getList(),
+                'books' => Book::getByCategoryId($book->category_id),
                 'book' => $book
             ]);
         }
 
+    }
+
+    public function search(Request $request){
+        $keyword = $request->input('keyword');
+
+        return view('pages.homepage.more-page', [
+            'books' => Book::getByKeyword($keyword),
+            'categories' => Category::getList(),
+            'keyword' => $keyword
+        ]);
     }
 }

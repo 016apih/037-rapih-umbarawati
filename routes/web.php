@@ -15,6 +15,8 @@ Route::controller(HomepageController::class)->group(function(){
     Route::get("/view-more", "more")->name('homepage.more');
 
     Route::get("/detail/{id}", "detail")->name('homepage.detail');
+    
+    Route::get('/search', 'search')->name('homepage.search');
 });
 
 Route::controller(AuthController::class)->prefix("auth")->name('auth.')->group(function(){

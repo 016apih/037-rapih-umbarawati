@@ -149,12 +149,14 @@
         <div class="container-fluid vesitable">
             <div class="container py-2">
                 <h1 class="fw-bold mb-0">Related books category</h1>
-                <div class="owl-carousel vegetable-carousel justify-content-center">
-                    @foreach ($books as $item)
-                        @if ($item->category_name == $book->category_name)
-                            <x-book.card-carousel :book="$item" />
-                        @endif
-                    @endforeach
+                <div class="row g-4">
+                    <div class="col-lg-12">
+                        <div class="row g-4">
+                            @foreach ($books as $book)
+                                <x-book.card :book="$book" />
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

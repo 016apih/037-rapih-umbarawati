@@ -48,9 +48,11 @@
         <!-- Copyright Start -->
         <div class="container-fluid copyright bg-dark py-4 bottom-0">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-center mb-3 mb-md-0">
-                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>pemulaBooks</a>, @2024</span>
+                <div class="row justify-content-center">
+                    <div class="text-center text-md-center mb-3 mb-md-0">
+                        <span class="text-light">
+                            <a href="#"><i class="fas fa-copyright text-light me-2"></i>pemulaBooks</a>, @2024
+                        </span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">
                     </div>
@@ -75,6 +77,37 @@
 
         <!-- Template Javascript -->
         <script src="{{ asset('./assets/homepage/js/main.js') }}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('.nav-link');
+                const currentHash = window.location.hash;
+
+                links.forEach(link => {
+                    if (link.getAttribute('href') === currentHash) {
+                        link.classList.add('active');
+                    }
+                });
+
+                window.addEventListener('hashchange', function () {
+                    const newHash = window.location.hash;
+                
+                    links.forEach(link => {
+                    if (link.getAttribute('href') === newHash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                    });
+                });
+
+                
+            });
+            // resetForm Search
+            function resetForm() {
+                document.getElementById('keywordMore').value = '';
+                document.getElementById('searchForm').submit();
+            }
+        </script>
     </body>
 
 </html>

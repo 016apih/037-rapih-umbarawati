@@ -40,6 +40,24 @@ class Book extends Model
             ->first();
     }
 
+    public static function getByCategoryId($category_id){
+        return DB::table('books')
+            ->join("categories", "categories.id", "=", "books.category_id")
+            ->join("users", "users.id", "=", "books.user_id")
+            ->select('books.*',  'categories.id as category_id', 'categories.name as category_name', 'users.username as username')
+            ->where('books.category_id', $category_id)
+            ->get();
+    }
+
+    public static function getByKeyword($keyword){
+        return DB::table('books')
+            ->join("categories", "categories.id", "=", "books.category_id")
+            ->join("users", "users.id", "=", "books.user_id")
+            ->select('books.*',  'categories.id as category_id', 'categories.name as category_name', 'users.username as username')
+            ->where('books.title', 'LIKE', "%{$keyword}%")
+            ->get();
+    }
+
     public static function create($payload){
         $now = Carbon::now();
 
