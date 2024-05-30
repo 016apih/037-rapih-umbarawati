@@ -49,13 +49,22 @@
                                 <p class="mb-0 mt-2">{{ $book->publication_year }}</p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-2">{{ $book->status }}</p>
+                                <p class="mb-0 mt-2">
+                                    @if($book->status == 'available')
+                                        <x-badge :item="['type' => 'bg-success', 'title' => $book->status ]" />
+                                    @else
+                                        <x-badge :item="['type' => 'bg-secondary', 'title' => $book->status ]" />
+                                    @endif
+                                </p>
                             </td>
                             <td>
                                 <form action="{{ route('member.storeLoan', $book->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-primary mb-0 mt-2">Borrow</button>
-                                    
+                                    <button type="submit" class="btn btn-sm btn-primary mb-0 mt-2"
+                                        @if($book->status == 'borrowed') disabled @endif
+                                    >
+                                        Borrow
+                                    </button>
                                 </form>
                             </td>
                         </tr>

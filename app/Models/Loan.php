@@ -21,6 +21,10 @@ class Loan extends Model
         'loan_time',
     ];
 
+    public static function getCount(){
+        return DB::select('SELECT COUNT(*) as total FROM loans')[0]->total;
+    }
+
     public static function getList(){
         return DB::table("loans")
             ->join("books", "books.id", "=", "loans.book_id")
@@ -54,6 +58,8 @@ class Loan extends Model
         $return_date = Carbon::parse($payload['return_date']);
         $loan_date = ceil($now->diffInDays($return_date));
 
+        Book::updateStatus($payload['book_id'], 'borrowed');
+
         return DB::table('loans')->insert([
             'book_id' => $payload['book_id'],
             'user_id' => $payload['user_id'],
@@ -69,6 +75,10 @@ class Loan extends Model
         $now = Carbon::now();
         $return_date = Carbon::parse($payload['return_date']);
         $loan_date = ceil($now->diffInDays($return_date));
+
+        if($payload['status'] == 'return'){
+            Book::updateStatus($payload['book_id'], 'available');
+        }
 
         return DB::table('loans')
             ->where('loans.id', $id)

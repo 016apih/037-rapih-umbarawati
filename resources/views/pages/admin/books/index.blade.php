@@ -39,15 +39,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($books as $book)
+                    @foreach ($books as $index=>$book)
                         <tr>
-                            <td>{{ $book->id }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>{{ $book->title }}</td>
                             <td>{{ $book->category_name }}</td>
                             <td>{{ $book->author }}</td>
                             <td>{{ $book->publisher }}</td>
                             <td>{{ $book->publication_year }}</td>
-                            <td>{{ $book->status }}</td>
+                            <td>
+                                @if($book->status == 'available')
+                                    <x-badge :item="['type' => 'bg-success', 'title' => $book->status ]" />
+                                @else
+                                    <x-badge :item="['type' => 'bg-secondary', 'title' => $book->status ]" />
+                                @endif
+                            </td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="{{ route('admin.books.action', ["detail", $book->id] ) }}">
                                     Detail

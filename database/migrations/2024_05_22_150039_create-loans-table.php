@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('book_id');
             $table->unsignedBigInteger('user_id');
             $table->date('loan_date');
-            $table->enum('status', ["active", "late", "return"]);
+            $table->enum('status', ["onprocess", "active", "late", "return"]);
             $table->date('return_date');
             $table->integer('loan_time');
             $table->timestamps();

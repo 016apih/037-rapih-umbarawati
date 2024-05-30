@@ -23,7 +23,7 @@ class BookSeeder extends Seeder
                 'publisher' => 'Qultum Media',
                 'publication_year' => '2017',
                 'stock' => 1,
-                'status' => 'available',
+                'status' => 'borrowed',
                 'img' => 'assets/img/book-item-4.jpg',
                 // 'created_at' => '2024-05-15 00:00:00',
             ], [

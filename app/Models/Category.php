@@ -12,6 +12,10 @@ class Category extends Model
 
     protected $fillables = ['name'];
 
+    public static function getCount(){
+        return DB::select('SELECT COUNT(*) as total FROM categories')[0]->total;
+    }
+
     public static function getList(){
 
         return DB::table("categories")->get();

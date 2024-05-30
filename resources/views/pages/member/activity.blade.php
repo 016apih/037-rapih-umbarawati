@@ -28,9 +28,25 @@
                                 <td>{{ $activity->loan_date }}</td>
                                 <td>{{ $activity->title }}</td>
                                 <td>{{ $activity->category_name }}</td>
-                                <td>{{ $activity->status }}</td>
+                                <td>
+                                    @if ($activity->status == 'active')
+                                        <x-badge :item="['type' => 'bg-success', 'title' => $activity->status ]" />
+                                    @elseif($activity->status == 'late')
+                                        <x-badge :item="['type' => 'bg-danger', 'title' => $activity->status ]" />
+                                    @elseif($activity->status == 'return')
+                                        <x-badge :item="['type' => 'bg-secondary', 'title' => $activity->status ]" />
+                                    @else
+                                        <x-badge :item="['type' => 'bg-info', 'title' => $activity->status ]" />
+                                    @endif
+                                </td>
                                 <td>{{ $activity->return_date }}</td>
-                                <td>{{ $activity->loan_time  }}</td>
+                                <td>
+                                    @if ($activity->status == 'return')
+                                        -
+                                    @else
+                                        {{ $activity->loan_time  }}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

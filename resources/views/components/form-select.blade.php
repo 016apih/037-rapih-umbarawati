@@ -1,5 +1,5 @@
 @props([
-   'item', // [[mode, name, label, value, options]]
+   'item', // [[mode, name, label, value, options, disabled:[field, value]]]
 ])
 
 <div class="row mb-3">
@@ -20,7 +20,8 @@
          @foreach ($item['options'] as $option)
             <option
                value="{{ $option->id }}"
-               @if ($item['value'] == $option->id) selected @endif
+               @if($item['value'] == $option->id) selected @endif
+               @if(isset($item['disabled']) && ($option->status == $item['disabled'][1])) disabled @endif
             >
                {{ $option->name ?? $option->title ?? $option->username }}
             </option>

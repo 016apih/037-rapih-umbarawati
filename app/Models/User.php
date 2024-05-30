@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -44,6 +46,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function getCount(){
+        return DB::select('SELECT COUNT(*) as total FROM users')[0]->total;
     }
 
     public static function getList(){

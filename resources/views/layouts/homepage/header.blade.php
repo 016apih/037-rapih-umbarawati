@@ -14,12 +14,21 @@
                 </div>
                 <div class="d-flex m-3 me-0">
                     {{-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> --}}
-                    <button class="btn-search btn border border-secondary px-4 btn-xl-square rounded-md bg-white me-4">
-                        <a href="{{ route('auth.loginPage') }}">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Login
+                    @if (session()->get('role'))
+                        <a href="{{ route(session()->get('role') == 'admin' ? 'admin.dashboard' : 'member.profile') }}">
+                            <button class="btn-search btn border border-secondary px-4 btn-xl-square rounded-md bg-white me-4">
+                                <i class="fas fa-home"></i>
+                                Home
+                            </button>
                         </a>
-                    </button>
+                    @else
+                        <a href="{{ route('auth.loginPage') }}">
+                            <button class="btn-search btn border border-secondary px-4 btn-xl-square rounded-md bg-white me-4">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Login
+                            </button>
+                        </a>
+                    @endif
                 </div>
             </div>
         </nav>

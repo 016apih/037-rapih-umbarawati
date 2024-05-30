@@ -20,6 +20,7 @@
                         action="{{ route('admin.books.'.$mode, $book == null ? null : $book->id) }}"
                     @endif
                     method="POST"
+                    enctype="multipart/form-data"
                 >
                     @csrf
                     @if ($book != null)
@@ -82,14 +83,29 @@
                             ]
                         ]"
                     />
-                    <x-form-input
-                        :item="[
-                            'mode' => $mode,
-                            'name' => 'img',
-                            'label' => 'Image',
-                            'value' => $book == null ? '' :  $book->img,
-                        ]"
-                    />
+
+                    @if ($book != null)
+                        <div class="row mb-3">
+                            <label for="img-preview" class="col-sm-2 col-form-label">
+                                Preview
+                            </label>
+                            <div class="col-sm-10">
+                                <img src="{{ asset($book->img) }}" alt="{{ $book->title }}" class="img-fluid me-5 rounded-circle" style="width: 100px; height: 100px;" />
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($mode != "detail" && $mode != "delete")
+                        <x-form-input
+                            :item="[
+                                'mode' => $mode,
+                                'type' => 'file',
+                                'name' => 'img',
+                                'label' => 'Image',
+                                'value' => $book == null ? '' :  $book->img,
+                            ]"
+                        />
+                    @endif
     
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">

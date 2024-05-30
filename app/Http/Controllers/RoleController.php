@@ -2,83 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    private $roles;
+    private $validateRole;
 
     public function __construct(){
-
+        $this->validateRole = [ 'name' => ['required', 'min:3'] ];
     }
     
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return Book::all();
+    public function roles(){
+        return view('pages.admin.roles.index',[
+            'roles' => Role::getList(),
+            'msg' => ''
+        ]);
     }
+    public function showRole(string $mode, int $id=null){
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('pages.admin.roles.create', ['mode' => 'create']);
+        return view('pages.admin.roles.form', [
+            'role' => Role::getById($id),
+            'mode' => $mode
+        ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
+    public function storeRole(Request $request){
         $payload = $request->all();
-        $newRole = [
-            'id' =>  end($this->roles)['id'] + 1,
-            'name' => $payload['name'],
-            'created_at' => date('d/m/Y')
-        ];
-        array_push($this->roles, $newRole);
+
+        $payload = $request->validate($this->validateRole);
+
+        $role = Role::create($payload);
         
-        return  $this->roles;
+        return view('pages.admin.roles.index',[
+            'roles' => Role::getList(),
+            'msg' => "role added successfully"
+        ]);
     }
+    public function updateRole(Request $request, int $id=null){
+        $payload = $request->all();
+        $payload = $request->validate($this->validateRole);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $id)
-    {
-        $result = Book::find($id);
-
-        if (!$result) {
-            $result = null;
-        }
-        return $result;
+        $role = Role::update_($payload, $id);
+        
+        return view('pages.admin.roles.index',[
+            'roles' => Role::getList(),
+            'msg' => "role Edited successfully"
+        ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroyRole(int $id){
+        $role = Role::delete_($id);
+        
+        return view('pages.admin.roles.index',[
+            'roles' => Role::getList(),
+            'msg' => "role deleted successfully"
+        ]);
     }
 }

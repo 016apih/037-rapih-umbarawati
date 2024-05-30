@@ -3,76 +3,69 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\RoleController;
 
 class UserController extends Controller
 {
-    private $users;
+    private $validateUser;
 
-    public function __construct(RoleController $roleController){
-    }
-    
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return User::all();
+    public function __construct(){
+        $this->validateUser = [
+            'username' => ['required'], // 'min:3'],
+            'email' => ['required'], // 'min:1'],  // 'unique:user'
+            'no_hp' => ['required'], // 'min:11']
+            'address' => ['nullable']
+        ];
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function users(){
+        return view('pages.admin.users.index',[
+            'users' => User::getList(),
+            'msg' => ''
+        ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function showUser(string $mode, int $id=null){
+        
+        return view('pages.admin.users.form', [
+            'user' => User::getById($id),
+            'roles' => Role::getList(),
+            'mode' => $mode
+        ]);
     }
+    public function storeUser(Request $request){
+        $payload = $request->all();
+        
+        $payload = $request->validate($this->validateUser);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $id)
-    {
-        $result = User::find($id);
+        $user = User::create($payload);
 
-        if (!$result) {
-            $result = null;
+        if($user){
+            return view('pages.admin.users.index',[
+                'users' => User::getList(),
+                'msg' => "user added successfully"
+            ]);
         }
-
-        return $result;
+        
     }
+    public function updateUser(Request $request, int $id=null){
+        $payload = $request->all();
+        $payload = $request->validate($this->validateUser);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $user = User::update_($payload, $id);
+        
+        return view('pages.admin.users.index',[
+            'users' => User::getList(),
+            'msg' => "User Edited successfully"
+        ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroyUser(int $id){
+        $user = User::delete_($id);
+        
+        return view('pages.admin.users.index',[
+            'users' => User::getList(),
+            'msg' => "role deleted successfully"
+        ]);
     }
 }

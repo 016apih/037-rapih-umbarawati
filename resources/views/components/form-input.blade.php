@@ -8,7 +8,7 @@
    </label>
    <div class="col-sm-10">
       <input name="{{ $item['name'] }}" class="form-control" id="{{ $item['name'] }}"
-      type="{{ $item['type'] ?? 'text' }}"
+         type="{{ $item['type'] ?? 'text' }}"
          value="{{ $item['value'] }}"
          @if($item['mode'] == "detail" || $item['mode'] == "delete") readonly @endif
       >

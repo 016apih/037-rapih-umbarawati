@@ -7,12 +7,17 @@ use Carbon\Carbon;
 
 use App\Models\Loan;
 use App\Models\Book;
+use App\Models\User;
 
 
 class MemberController extends Controller
 {
     public function profile(){
-        return view('pages.member.index');
+        $id = session()->get('userId');
+
+        return view('pages.member.index', [
+            'user' =>  User::getById($id)
+        ]);
     }
 
     public function activity(){
@@ -33,7 +38,7 @@ class MemberController extends Controller
         $loan = Loan::create([
             'book_id' => $book->id,
             'user_id' => session()->get('userId'),
-            'status' => 'active',
+            'status' => 'onprocess',
             'return_date' =>  $now->addDays(5)->format('Y-m-d')
         ]);
         

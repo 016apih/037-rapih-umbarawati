@@ -27,10 +27,12 @@
                     <form action="{{ route('auth.login') }}" method="POST">
                         @csrf
                         <input type="email" name="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email"
-                            value="{{ $payload == null ? 'admin@gmail.com' : $payload['email'] }}" defaultValue="member"
+                            value="{{ $payload == null ? '' : $payload['email'] }}"
+                            {{-- defaultValue="member" --}}
                         >
                         <input type="password" name="password" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Password"
-                            value="{{ $payload == null ? 'password' : $payload['password'] }}" defaultValue="member@gmail.com"
+                            value="{{ $payload == null ? '' : $payload['password'] }}"
+                            {{-- defaultValue="member@gmail.com" --}}
                         >
 
                         <p class=" mb-4">

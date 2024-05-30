@@ -23,6 +23,10 @@ class Book extends Model
         'img'
     ];
 
+    public static function getCount(){
+        return DB::select('SELECT COUNT(*) as total FROM books')[0]->total;
+    }
+
     public static function getList(){
         return DB::table("books")
             ->join("categories", "categories.id", "=", "books.category_id")
@@ -40,21 +44,12 @@ class Book extends Model
             ->first();
     }
 
-    public static function getByCategoryId($category_id){
+    public static function getByFieldValue($field, $value){
         return DB::table('books')
             ->join("categories", "categories.id", "=", "books.category_id")
             ->join("users", "users.id", "=", "books.user_id")
             ->select('books.*',  'categories.id as category_id', 'categories.name as category_name', 'users.username as username')
-            ->where('books.category_id', $category_id)
-            ->get();
-    }
-
-    public static function getByKeyword($keyword){
-        return DB::table('books')
-            ->join("categories", "categories.id", "=", "books.category_id")
-            ->join("users", "users.id", "=", "books.user_id")
-            ->select('books.*',  'categories.id as category_id', 'categories.name as category_name', 'users.username as username')
-            ->where('books.title', 'LIKE', "%{$keyword}%")
+            ->where('books.'.$field, 'LIKE', "%{$value}%")
             ->get();
     }
 
@@ -69,7 +64,7 @@ class Book extends Model
             'publisher' => $payload['publisher'],
             'publication_year' => $payload['publication_year'],
             'stock' => $payload['stock'] ?? 1,
-            'status' => $payload['status'] ?? "availabe",
+            'status' => $payload['status'] ?? "available",
             'img' => $payload['img'],
             'created_at' => $now,
         ]);
@@ -77,7 +72,12 @@ class Book extends Model
 
     public static function update_($payload, $id){
         $now = Carbon::now();
+        $book = DB::table('books')
+            ->where('books.id', $id)
+            ->first();
 
+        $img = $payload['img'] ?? $book->img;
+        
         return DB::table('books')
             ->where('books.id', $id)
             ->update([
@@ -87,8 +87,19 @@ class Book extends Model
                 'publisher' => $payload['publisher'],
                 'publication_year' => $payload['publication_year'],
                 'stock' => $payload['stock'] ?? 1,
-                'status' => $payload['status'] ?? "availabe",
-                'img' => $payload['img'],
+                'status' => $payload['status'] ?? "available",
+                'img' => $img,
+                'updated_at' => $now,
+            ]);
+    }
+
+    public static function updateStatus($id, $status="available"){
+        $now = Carbon::now();
+        
+        return DB::table('books')
+            ->where('books.id', $id)
+            ->update([
+                'status' => $status,
                 'updated_at' => $now,
             ]);
     }

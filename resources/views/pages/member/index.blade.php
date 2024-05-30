@@ -10,11 +10,11 @@
                 {{-- <h6 class="mb-4">My Profile</h6> --}}
                 <div class="testimonial-item text-center">
                     <img class="img-fluid rounded-circle mx-auto mb-4" src="{{ asset('assets/img/avatar.jpg') }}" style="width: 100px; height: 100px;" alt="img-user">
-                    <h5 class="mb-1">{{ $auth['username'] }}</h5>
-                    <p class="mb-1">{{ $auth['email'] }}</p>
-                    <p class="mb-1">{{ $auth['no_hp'] }}</p>
-                    <p class="mb-1">{{ $auth['address'] }}</p>
-                    <p class="mb-0">Joined member since {{ $auth['created_at'] }}</p>
+                    <h5 class="mb-1">{{ $user->username }}</h5>
+                    <p class="mb-1">{{ $user->email }}</p>
+                    <p class="mb-1">{{ $user->no_hp }}</p>
+                    <p class="mb-1">{{ $user->address }}</p>
+                    <p class="mb-0">Joined member since {{ $user->created_at }}</p>
                     
                 </div>
             </div>

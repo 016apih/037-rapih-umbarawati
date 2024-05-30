@@ -36,7 +36,8 @@
                             'name' => 'book_id',
                             'label' => 'Title',
                             'value' => $loan == null ? '' :  $loan->book_id,
-                            'options' => $books
+                            'options' => $books,
+                            'disabled' => ['status', 'borrowed']
                         ]"
                     />
                     <x-form-select
@@ -55,6 +56,7 @@
                             'label' => 'Status',
                             'value' => $loan == null ? '' :  $loan->status,
                             'options' => [
+                                (object)['id' => 'onprocess', 'name' => 'On Process'],
                                 (object)['id' => 'active', 'name' => 'Active'],
                                 (object)['id' => 'late', 'name' => 'Late'],
                                 (object)['id' => 'return', 'name' => 'Return']
@@ -70,14 +72,6 @@
                             'value' => $loan == null ? '' :  $loan->return_date,
                         ]"
                     />
-                    {{-- <x-form-input
-                        :item="[
-                            'mode' => $mode,
-                            'name' => 'loan_time',
-                            'label' => 'Days',
-                            'value' => $loan == null ? '' :  $loan->loan_time,
-                        ]"
-                    /> --}}
 
                     @if ($mode != "detail")
                         <button type="submit" class="btn text-capitalize @if($mode == "delete") btn-danger @else btn-primary @endif">

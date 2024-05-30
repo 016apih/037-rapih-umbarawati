@@ -13,6 +13,10 @@ class Role extends Model
 
     protected $fillables = ['name'];
 
+    public static function getCount(){
+        return DB::select('SELECT COUNT(*) as total FROM roles')[0]->total;
+    }
+
     public static function getList(){
 
         return DB::table("roles")->get();

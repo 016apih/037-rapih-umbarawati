@@ -28,7 +28,7 @@ class LoanSeeder extends Seeder
                 'book_id' => 2,
                 'user_id' => 2,
                 'loan_date' => '2024-05-17 00:00:00',
-                'status' => 'active',
+                'status' => 'return',
                 'return_date' => '2024-05-19 00:00:00',
                 'loan_time' => 2,
                 'created_at' => '2024-05-15 00:00:00',

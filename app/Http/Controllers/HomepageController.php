@@ -30,7 +30,7 @@ class HomepageController extends Controller
             return view('pages.homepage.404');
         } else {
             return view('pages.homepage.detail-page', [
-                'books' => Book::getByCategoryId($book->category_id),
+                'books' => Book::getByFieldValue('category_id', $book->category_id),
                 'book' => $book
             ]);
         }
@@ -41,7 +41,7 @@ class HomepageController extends Controller
         $keyword = $request->input('keyword');
 
         return view('pages.homepage.more-page', [
-            'books' => Book::getByKeyword($keyword),
+            'books' => Book::getByFieldValue('title', $keyword),
             'categories' => Category::getList(),
             'keyword' => $keyword
         ]);

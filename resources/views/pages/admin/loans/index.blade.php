@@ -45,7 +45,17 @@
                             <td>{{ $loan->title }}</td>
                             <td>{{ $loan->loan_date }}</td>
                             <td>{{ $loan->return_date }}</td>
-                            <td>{{ $loan->status }}</td>
+                            <td>
+                                @if ($loan->status == 'active')
+                                    <x-badge :item="['type' => 'bg-success', 'title' => $loan->status ]" />
+                                @elseif($loan->status == 'late')
+                                    <x-badge :item="['type' => 'bg-danger', 'title' => $loan->status ]" />
+                                @elseif($loan->status == 'return')
+                                    <x-badge :item="['type' => 'bg-secondary', 'title' => $loan->status ]" />
+                                @else
+                                    <x-badge :item="['type' => 'bg-info', 'title' => $loan->status ]" />
+                                @endif
+                            </td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="{{ route('admin.loans.action', ["detail", $loan->id] ) }}">
                                     Detail

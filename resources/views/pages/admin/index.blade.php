@@ -8,16 +8,16 @@
    <div class="container-fluid pt-4 px-4">
       <div class="row g-4">
          <div class="col-sm-6 col-xl-3">
-            <x-card-dashboard :card='["fas fa-user-cog", "Roles", "5"]' />
+            <x-card-dashboard :card='["fas fa-user-cog", "Roles", $nRole]' />
          </div>
          <div class="col-sm-6 col-xl-3">
-            <x-card-dashboard :card='["fas fa-users", "Users", "15"]' />
+            <x-card-dashboard :card='["fas fa-users", "Users", $nUser]' />
          </div>
          <div class="col-sm-6 col-xl-3">
-            <x-card-dashboard :card='["fas fa-book", "Books", "10"]' />
+            <x-card-dashboard :card='["fas fa-book", "Books", $nBook]' />
          </div>
          <div class="col-sm-6 col-xl-3">
-            <x-card-dashboard :card='["fas fa-exchange-alt", "Loans", "10"]' />
+            <x-card-dashboard :card='["fas fa-exchange-alt", "Loans", $nLoan]' />
          </div>
       </div>
    </div>
