@@ -31,19 +31,19 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Image</th>
                         <th scope="col">Title</th>
                         <th scope="col">Category</th>
                         <th scope="col">Author</th>
                         <th scope="col">Publisher</th>
                         <th scope="col">Publication Year</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Image</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(count($books) > 0)
                         @foreach ($books as $book)
-                            <tr>
+                            <tr onclick="window.location.href='{{ route('homepage.detail', $book->id) }}'" style="cursor: pointer;">
                                 <td>
                                     <p class="mb-0 mt-4">{{ $book->title }}</p>
                                 </td>
@@ -60,7 +60,13 @@
                                     <p class="mb-0 mt-4">{{ $book->publication_year }}</p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">{{ $book->status }}</p>
+                                    <p class="mb-0 mt-4">
+                                        @if($book->status == 'available')
+                                            <x-badge :item="['type' => 'bg-success', 'title' => $book->status ]" />
+                                        @else
+                                            <x-badge :item="['type' => 'bg-secondary', 'title' => $book->status ]" />
+                                        @endif
+                                    </p>
                                 </td>
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
