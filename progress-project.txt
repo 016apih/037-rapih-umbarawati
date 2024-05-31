@@ -11,10 +11,10 @@ Deskripsi     : Website untuk mengelola koleksi buku pribadi, mencari, meminjamk
 Fitur :
    HomePage (100%)
    Authentication (100%)
-   AdminPage (90%)   // 10% untuk testing
-   MemberPage (90%) // 10% untuk testing
+   AdminPage (100%)
+   MemberPage (100%)
 
-Rata-Rata Progress : 95%
+Rata-Rata Progress : 100%
 
 last-commit: https://github.com/016apih/037-rapih-umbarawati/commit/81df47f6abf9e3623527b7218ddaa607d7ad3280
 
