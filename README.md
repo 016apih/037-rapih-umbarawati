@@ -13,3 +13,8 @@
    ![new book](image-3.png)
 
    ![quotes](image-2.png)
+
+## Register & login
+   ![register](image-5.png)
+
+   ![login](image-4.png)
